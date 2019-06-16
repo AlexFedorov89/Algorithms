@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Main {
 
-    private static int COUNT_ELEMENTS = 1000;
+    private static int COUNT_ELEMENTS = 1000000;
 
     public static void main(String[] args) throws CloneNotSupportedException {
         Random rd = new Random();
