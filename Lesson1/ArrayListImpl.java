@@ -106,6 +106,9 @@ public class ArrayListImpl<E extends Object & Comparable<? super E>> implements 
 
     @Override
     protected ArrayListImpl clone() throws CloneNotSupportedException {
-        return (ArrayListImpl) super.clone();
+        ArrayListImpl arrayListCopy = (ArrayListImpl) super.clone();
+        arrayListCopy.array = Arrays.copyOf(array, array.length);
+
+        return arrayListCopy;
     }
 }

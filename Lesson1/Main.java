@@ -1,6 +1,7 @@
 package Lesson1;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -29,17 +30,17 @@ public class Main {
         startTime = System.nanoTime();
         myArray.sortBubble();
         stopTime = System.nanoTime();
-        System.out.printf("Время выполнения сортировки методом Пузырька: %d%n" , (stopTime - startTime));
+        System.out.printf("Время выполнения сортировки методом Пузырька: %d%n" , TimeUnit.NANOSECONDS.toMicros(stopTime - startTime));
 
         startTime = System.nanoTime();
         myArray2.sortSelection();
         stopTime = System.nanoTime();
-        System.out.printf("Время выполнения сортировки методом Выбора: %d%n" , (stopTime - startTime));
+        System.out.printf("Время выполнения сортировки методом Выбора: %d%n" , TimeUnit.NANOSECONDS.toMicros(stopTime - startTime));
 
         startTime = System.nanoTime();
         myArray3.sortInsertion();
         stopTime = System.nanoTime();
-        System.out.printf("Время выполнения сортировки методом Вставки: %d%n" , (stopTime - startTime));
+        System.out.printf("Время выполнения сортировки методом Вставки: %d%n" , TimeUnit.NANOSECONDS.toMicros(stopTime - startTime));
 
     }
 

@@ -3,22 +3,22 @@ package Lesson1;
 public class SortAlgorithms {
 
     public static <T extends Comparable<? super T>> T[] bubleSort(T[] array) {
-        boolean F;
+        boolean wasSwap;
 
         for (int i = 0; i < array.length; i++) {
-            F = false;
+            wasSwap = false;
 
             for (int j = 0; j < array.length - 1 - i; j++) {
                 if (array[j].compareTo(array[j + 1]) > 0) {
-                    T temp = array[j];
+                    T tmp = array[j];
                     array[j] = array[j + 1];
-                    array[j + 1] = temp;
+                    array[j + 1] = tmp;
 
-                    F = true;
+                    wasSwap = true;
                 }
-
-                if (F == false) break;
             }
+
+            if (!wasSwap) break;
         }
 
         return array;
@@ -53,7 +53,6 @@ public class SortAlgorithms {
             }
             array[j] = key;
         }
-
 
         return array;
     }
