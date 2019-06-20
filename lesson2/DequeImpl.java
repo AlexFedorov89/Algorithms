@@ -13,13 +13,58 @@ public class DequeImpl<T> implements Deque<T> {
         queue = (T[]) new Object[maxSize];
     }
 
+    private void allocateNewArray(int startingIndex) {
+        int newLength = (size == 0) ? 4 : size * 2;
+
+        T[] newArray = (T[]) new Object[newLength];
+
+        if (size > 0) {
+            int targetIndex = startingIndex;
+
+            // Копируем содержимое...
+            // Если массив не закольцован, просто копируем элементы.
+            // В противном случае, копирует от head до конца, а затем от начала массива до tail.
+
+            // Если tail меньше, чем head, переходим в начало.
+            if (tail < head) {
+                // Копируем _items[head].._items[end] в newArray[0]..newArray[N].
+                for (int index = head; index < queue.length; index++) {
+                    newArray[targetIndex] = queue[index];
+                    targetIndex++;
+                }
+
+                // Копируем _items[0].._items[tail] в newArray[N+1]..
+                for (int index = 0; index <= tail; index++) {
+                    newArray[targetIndex] = queue[index];
+                    targetIndex++;
+                }
+            } else {
+                // Копируем _items[head].._items[tail] в newArray[0]..newArray[N]
+                for (int index = head; index <= tail; index++) {
+                    newArray[targetIndex] = queue[index];
+                    targetIndex++;
+                }
+            }
+
+
+            head = startingIndex;
+            tail = targetIndex - 1;
+        } else {
+            // Массив пуст.
+            head = 0;
+            tail = -1;
+        }
+
+        queue = newArray;
+    }
+
     @Override
     public void insertLeft(T value) {
         // Проверим, необходимо ли увеличение массива:
-//        if (queue.length == size)
-//        {
-//            allocateNewArray(1);
-//        }
+        if (queue.length == size)
+        {
+            allocateNewArray(1);
+        }
 
         // Так как массив не заполнен и _head больше 0,
         // мы знаем, что есть место в начале массива.
@@ -46,10 +91,9 @@ public class DequeImpl<T> implements Deque<T> {
     @Override
     public void insertRight(T value) {
         // Проверим, необходимо ли увеличение массива:
-//        if (queue.length == size)
-//        {
-//            allocateNewArray(0);
-//        }
+        if (queue.length == size) {
+            allocateNewArray(0);
+        }
 
         // Теперь, когда у нас есть подходящий массив,
         // если _tail в конце массива, нам надо перейти в начало.
@@ -72,10 +116,9 @@ public class DequeImpl<T> implements Deque<T> {
 
     @Override
     public T removeLeft() {
-//        if (size == 0)
-//        {
-//            throw new InvalidOperationException("The deque is empty");
-//        }
+        if (isEmpty()) {
+            return null;
+        }
 
         T value = queue[head];
 
@@ -95,10 +138,9 @@ public class DequeImpl<T> implements Deque<T> {
 
     @Override
     public T removeRight() {
-//        if (size == 0)
-//        {
-//            throw new InvalidOperationException("The deque is empty");
-//        }
+        if (isEmpty()) {
+            return null;
+        }
 
         T value = queue[tail];
 
@@ -118,10 +160,10 @@ public class DequeImpl<T> implements Deque<T> {
     @Override
     public T peekLeft() {
 
-//        if (size == 0)
-//        {
-//            throw new InvalidOperationException("The deque is empty");
-//        }
+        if (isEmpty())
+        {
+            return null;
+        }
 
         return queue[head];
     }
@@ -129,10 +171,10 @@ public class DequeImpl<T> implements Deque<T> {
     @Override
     public T peekRight() {
 
-//        if (size == 0)
-//        {
-//            throw new InvalidOperationException("The deque is empty");
-//        }
+        if (isEmpty())
+        {
+            return null;
+        }
 
         return queue[tail];
     }

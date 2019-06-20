@@ -5,22 +5,27 @@ public class Main {
 
         // 1. Реализовать рассмотренные структуры данных в консольных программах.
 
-        //testStack();
-        //testQueue();
+        testStack();
+        testQueue();
 
-//        // 2. Создать программу, которая переворачивает вводимые строки (читает справа налево).
-//        String stringToReverse = "Reverse this string!";
-//        Stack<Character> reverseString = new StackImpl<>(stringToReverse.length());
-//
-//        for (int i = 0; i < stringToReverse.length(); i++) {
-//            reverseString.push(stringToReverse.charAt(i));
-//        }
-//
-//        while ( !reverseString.isEmpty() ){
-//            System.out.print(reverseString.pop());
-//        }
+        // 2. Создать программу, которая переворачивает вводимые строки (читает справа налево).
+        String stringToReverse = "Reverse this string!";
+        Stack<Character> reverseString = new StackImpl<>(stringToReverse.length());
+
+        for (int i = 0; i < stringToReverse.length(); i++) {
+            reverseString.push(stringToReverse.charAt(i));
+        }
+
+        while ( !reverseString.isEmpty() ){
+            System.out.print(reverseString.pop());
+        }
 
         // 3. Создать класс для реализации дека.
+        testDeque();
+
+    }
+
+    private static void testDeque() {
         Deque<Integer> myDeque = new DequeImpl<>(5);
 
         myDeque.insertRight(1);
@@ -28,6 +33,9 @@ public class Main {
         myDeque.insertRight(3);
         myDeque.insertRight(4);
         myDeque.insertLeft(5);
+        myDeque.insertLeft(6);
+        myDeque.insertLeft(7);
+        myDeque.insertLeft(8);
 //        myDeque.insertRight(7);
 //        myDeque.insertRight(8);
 
@@ -42,7 +50,6 @@ public class Main {
 //        myDeque.insertRight(9);
 
         System.out.println(myDeque.toString());
-
     }
 
     private static void testQueue() {
